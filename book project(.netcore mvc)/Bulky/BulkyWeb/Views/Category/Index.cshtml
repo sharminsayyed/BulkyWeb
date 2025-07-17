@@ -1,0 +1,44 @@
+﻿<!-- this is the action (index) view for category controller-->
+<!-- here the model takes the data from controller return type-->
+@model List<Category>
+<div class="container">
+	<div class=" row pt-4 pb-3">
+		<div class="col-6">
+			<h2 class="text-primary">
+				Category List
+			</h2>
+		</div>
+		<div class="col-6 text-end">
+			<a asp-controller="Home" asp-action="Index" class="btn btn-primary">
+				<i class="bi bi-patch-plus"></i> Create New Category
+			</a>
+
+		</div>
+
+	</div>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>
+				Category Name
+			</th>
+			<th>
+				Display Order
+			</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		<!-- we can c# code here 
+			model is written like Model refers to the same thing 
+		-->
+		@foreach(var obj in Model.OrderBy(u=> u.DisplayOrder)){
+		<tr>
+			<td>@obj.Name</td>
+			<td>@obj.DisplayOrder</td>
+		</tr>
+		}
+	</tbody>
+	
+</table>
+</div>
