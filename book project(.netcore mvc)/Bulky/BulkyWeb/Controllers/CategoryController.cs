@@ -27,6 +27,8 @@ namespace BulkyWeb.Controllers
         {
             return View();
         }
-        
+
+       
+
     }
 }
