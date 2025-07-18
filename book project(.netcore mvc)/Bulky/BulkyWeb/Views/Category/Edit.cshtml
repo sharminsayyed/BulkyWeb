@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = " Edit Category";
+}
+
+<!--header and footer are present in _Layout.cshtml -->
+@model Category
+
+<!-- here we send the details using post for which we use httppost in controllers
+    it will hvae the obj of category that needs to be added
+-->
+<form method="post">
+     <input asp-for="Id" hidden /> 
+
+    <div class="border p-3 mt-4">
+        <div class="row pt-2">
+            <h2 class="text-primary p-0">Edit Category</h2>
+            <hr />
+        </div>
+        <!--here we can see all the error message at one place only-->
+        <div asp-validation-summary="ModelOnly"></div>
+        @* <div asp-validation-summary="All"></div><!-- this will not show error for any property -->
+        <div asp-validation-summary="None"></div><!-- this here will not show any validation error--> *@
+
+        <div class="row mb-3 p-1">
+            <label asp-for="Name" class="p-0"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="row mb-3 p-1">
+            <label asp-for="DisplayOrder" class="p-0"></label>
+            <input asp-for="DisplayOrder" class="form-control" />
+            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3 p-1">
+                <button type="submit" class="btn btn-primary form-control ">Update</button>
+
+            </div>
+            <div class="col-6 col-md-3 p-1">
+                <a asp-controller="Category" asp-action="Index" class="btn btn-outline-dark form-control">Back to list</a>
+            </div>
+        </div>
+
+    </div>
+</form>
+@* here we add the validation scripts for partial view for client side validation--> *@
+@* client side validation - user input is validated in the browser before it is sent to the server-> *@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

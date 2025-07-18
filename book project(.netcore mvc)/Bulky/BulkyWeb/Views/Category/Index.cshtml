@@ -1,6 +1,11 @@
 ﻿<!-- this is the action (index) view for category controller-->
 <!-- here the model takes the data from controller return type-->
 @model List<Category>
+<!--here we add the partial view for tempdata insetead of rewriting it everywhere we can use the partial tag with partial view easily in any Controller
+	instead of adding the notification partial view in each index view of each controller we add it the layout view above the render body 
+-->
+@* <partial name="_NotificationPartial"/> *@
+
 <div class="container">
 	<div class=" row pt-4 pb-3">
 		<div class="col-6">
@@ -9,12 +14,10 @@
 			</h2>
 		</div>
 		<div class="col-6 text-end">
-			<a asp-action="NewC" class="btn btn-primary">
+			<a asp-controller="Category" asp-action="NewC" class="btn btn-primary">
 				<i class="bi bi-patch-plus"></i> Create New Category
 			</a>
-			<a asp-action="Create" class="btn btn-primary">
-				<i class="bi bi-patch-plus"></i> Create New a Category
-			</a>
+		
 		</div>
 
 	</div>
@@ -27,6 +30,7 @@
 			<th>
 				Display Order
 			</th>
+			<th>Operations</th>
 
 		</tr>
 	</thead>
@@ -38,6 +42,16 @@
 		<tr>
 			<td>@obj.Name</td>
 			<td>@obj.DisplayOrder</td>
+			<td>
+				<div class="btn-group w-75" role="group">
+					<a asp-controller="Category" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+								<i class="bi bi-pencil-square"></i> Edit
+					</a>
+					<a asp-controller="Category" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
+								<i class="bi bi-trash-fill"></i> Delete
+					</a>
+				</div>
+			</td>
 		</tr>
 		}
 	</tbody>
