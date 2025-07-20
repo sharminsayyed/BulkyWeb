@@ -1,7 +1,7 @@
-﻿using BulkyWeb.Data;
-using Microsoft.AspNetCore.Mvc;
-using BulkyWeb.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Bulky_DataAcccess.Data;
+using Bulky_Models;
 
 // here we can perfrom crud operations 
 namespace BulkyWeb.Controllers

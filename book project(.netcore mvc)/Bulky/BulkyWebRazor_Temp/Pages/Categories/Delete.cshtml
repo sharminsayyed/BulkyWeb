@@ -1,0 +1,43 @@
+﻿@page
+@model BulkyWebRazor_Temp.Pages.Categories.DeleteModel
+@{
+    ViewData["Title"] = " Delete Category";
+}
+
+<!--header and footer are present in _Layout.cshtml -->
+
+<!-- here we send the details using post for which we use httppost in controllers
+    it will hvae the obj of category that needs to be added
+-->
+<form method="post">
+    <input asp-for="category.Id" hidden /> 
+
+    <div class="border p-3 mt-4">
+        <div class="row pt-2">
+            <h2 class="text-primary p-0">Delete Category</h2>
+            <hr />
+        </div>
+        <!--here we dont have any validation because we are deleting-->
+        
+
+        <div class="row mb-3 p-1">
+            <label asp-for="category.Name" class="p-0"></label>
+            <input asp-for="category.Name" disabled class="form-control" />
+        </div>
+        <div class="row mb-3 p-1">
+            <label asp-for="category.DisplayOrder" class="p-0"></label>
+            <input asp-for="category.DisplayOrder" disabled class="form-control" />
+
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3 p-1">
+                <button type="submit" class="btn btn-danger form-control ">delete</button>
+
+            </div>
+            <div class="col-6 col-md-3 p-1">
+                <a asp-controller="/categories/index" asp-action="Index" class="btn btn-outline-dark form-control">Back to list</a>
+            </div>
+        </div>
+
+    </div>
+</form>

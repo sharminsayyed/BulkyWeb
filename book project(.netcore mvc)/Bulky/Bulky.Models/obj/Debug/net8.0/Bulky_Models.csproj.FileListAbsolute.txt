@@ -1,0 +1,12 @@
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\bin\Debug\net8.0\Bulky_Models.deps.json
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\bin\Debug\net8.0\Bulky_Models.dll
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\bin\Debug\net8.0\Bulky_Models.pdb
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\obj\Debug\net8.0\Bulky_Models.GeneratedMSBuildEditorConfig.editorconfig
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\obj\Debug\net8.0\Bulky_Models.AssemblyInfoInputs.cache
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\obj\Debug\net8.0\Bulky_Models.AssemblyInfo.cs
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\obj\Debug\net8.0\Bulky_Models.csproj.CoreCompileInputs.cache
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\obj\Debug\net8.0\Bulky_Models.sourcelink.json
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\obj\Debug\net8.0\Bulky_Models.dll
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\obj\Debug\net8.0\refint\Bulky_Models.dll
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\obj\Debug\net8.0\Bulky_Models.pdb
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\obj\Debug\net8.0\ref\Bulky_Models.dll

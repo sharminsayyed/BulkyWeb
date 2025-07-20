@@ -286,3 +286,9 @@ F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\BulkyWeb\bin\Debug\ne
 F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\BulkyWeb\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\BulkyWeb\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\BulkyWeb\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\BulkyWeb\bin\Debug\net8.0\Bulky_DataAccess.dll
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\BulkyWeb\bin\Debug\net8.0\Bulky_Models.dll
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\BulkyWeb\bin\Debug\net8.0\Bulky_Utility.dll
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\BulkyWeb\bin\Debug\net8.0\Bulky_DataAccess.pdb
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\BulkyWeb\bin\Debug\net8.0\Bulky_Models.pdb
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\BulkyWeb\bin\Debug\net8.0\Bulky_Utility.pdb
