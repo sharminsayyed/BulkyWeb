@@ -2,8 +2,10 @@ using System.Diagnostics;
 using Bulky_Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BulkyWeb.Controllers
+namespace BulkyWeb.Areas.Customer.Controllers
 {
+    // here we need to specify to which area this controller belongs to
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

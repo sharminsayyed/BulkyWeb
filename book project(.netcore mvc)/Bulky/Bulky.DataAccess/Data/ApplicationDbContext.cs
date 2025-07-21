@@ -25,6 +25,9 @@ namespace Bulky_DataAcccess.Data
         public DbSet<Category> Categories { get; set; }
         // add-migration AddCategoriesTableToDb 
 
+        // create a table 
+        DbSet<Product> Products { get; set; }
+
         // to add records to the category table 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,7 +36,12 @@ namespace Bulky_DataAcccess.Data
                 new Category { Id = 2, Name = "Comedy", DisplayOrder = 3 },
                 new Category { Id = 3, Name = "SciFi", DisplayOrder = 2 }
                 );
+
+            modelBuilder.Entity<Product>().HasData(
+                );
         }
+
+        DbSet<Product> Products { get; set; }
 
     }
 }

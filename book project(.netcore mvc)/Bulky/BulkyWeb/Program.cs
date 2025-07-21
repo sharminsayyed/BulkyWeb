@@ -1,4 +1,6 @@
 using Bulky_DataAcccess.Data;
+using Bulky_DataAccess.Repository;
+using Bulky_DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,16 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 // tools -> nuget package manager ->console -> update-database 
 // this creates a database in SSMS
 
+//adding category repository to the service collection
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+// register your custom repository class (CategoryRepository) with the built-in Dependency Injection (DI)
+//Scoped = A new instance is created once per HTTP request.
+
+// now instead of injecting ICategoryRepository in the controller, we can inject IUnitOfWork
+// becaue it consist of all repositories
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//Whenever someone asks for IUnitOfWork, give them an instance of UnitOfWork class.
+// asked of IUnitOfWork implementation of UnitOfWork class will be provided
 
 var app = builder.Build();
 
@@ -39,8 +51,13 @@ app.UseAuthorization();
 // these are basically urls - that contains controllers and index and actions
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+// here we also add area (admin ,customer)routing
 //pattern: "{controller=Home}/{action=Privacy}/{id?}"); // try this out ans see on the homepage u get the privacy view page displayed
 
+// important point category controller is added to admin area 
+// so need to add the views of te category controller in the admin area
+// home controller is added to customer area
+// so need to add the views of the home controller in the customer area
 
 app.Run();
