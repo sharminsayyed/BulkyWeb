@@ -56,7 +56,8 @@ namespace Bulky_Models
         [ValidateNever]
         public Category Category { get; set; }
 
-        // image url for the product 
+        // image url for the product
+        [ValidateNever]
         public string ImageUrl { get; set; }
     }
 }

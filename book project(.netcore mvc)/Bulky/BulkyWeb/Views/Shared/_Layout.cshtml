@@ -70,6 +70,10 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+     <!-- tinymce is a website from where we get the script and api key under html/css section adding it here -->
+     <!-- doing it to addd textarea for description (product table) -->
+    <script src="https://cdn.tiny.cloud/1/q7oh6xk7v45ig470nhg3wmu9bxvfnif6wnuon6hvfxdn0en6/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -24,8 +24,8 @@ namespace BulkyWeb.Areas.Admin.Controllers
             return View(productList);
         }
 
-        // GET - Create
-        public IActionResult Create() {
+        // GET - Create and update 
+        public IActionResult Upsert(int? id) {
             // we also have to pass the list of Categories to the view ab 
             // here we use projection (efcore) to convert the list of categories to a list of SelectListItem
             //used in ASP.NET Core MVC when you want to populate a dropdown list in a form, like when creating or editing a Product and selecting its Category.
@@ -56,15 +56,26 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 Product = new Product()
             };
 
-            return View(productVM);
+            if (id == null || id == 0)
+            { // here we create the new product 
+                return View(productVM);
+            }
+            else
+            {
+                // here we update the existing product 
+                // fetching the obj from db
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                //if (productVM.Product == null) { return NotFound(); }
+                return View(productVM);
+            }
         }
 
         // POST - Create
         [HttpPost]
-        public IActionResult Create(ProductVM obj)
+        public IActionResult Upsert(ProductVM obj , IFormFile file)
         {
             // here product.Category , product.CategoryList are invalid as we do not fill them in the form  
-            // and we dont want to valid these 2 categories
+            // and we dont want to valid these 2 categories we use [Bind] attribute to ignore these 2 properties [ValidateNever]
             if (ModelState.IsValid)
             {
                 _unitOfWork.Product.Add(obj.Product);
@@ -78,33 +89,33 @@ namespace BulkyWeb.Areas.Admin.Controllers
             }
         }
 
-        // GET - Edit
-        public IActionResult Edit(int? id)
-        {
-            if (id == null || id == 0) { return NotFound(); }
-            // here we the obj from db
-            Product? obj = _unitOfWork.Product.Get(u => u.Id == id);
-            if (obj == null) { return NotFound(); }
-            return View(obj);
-        }
+        //// GET - Edit
+        //public IActionResult Edit(int? id)
+        //{
+        //    if (id == null || id == 0) { return NotFound(); }
+        //    // here we the obj from db
+        //    Product? obj = _unitOfWork.Product.Get(u => u.Id == id);
+        //    if (obj == null) { return NotFound(); }
+        //    return View(obj);
+        //}
 
-        // POST - Edit
-        [HttpPost]
-        public IActionResult Edit(Product obj)
-        {
-            if (ModelState.IsValid)
-            { 
-                // here we update the given obj in db 
-                _unitOfWork.Product.Update(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Product updated successfully";
-                return RedirectToAction("Index"); 
-            }
-            else
-            {
-                return View();
-            }
-        }
+        //// POST - Edit
+        //[HttpPost]
+        //public IActionResult Edit(Product obj)
+        //{
+        //    if (ModelState.IsValid)
+        //    { 
+        //        // here we update the given obj in db 
+        //        _unitOfWork.Product.Update(obj);
+        //        _unitOfWork.Save();
+        //        TempData["success"] = "Product updated successfully";
+        //        return RedirectToAction("Index"); 
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
 
         // GET - Delete
         public IActionResult Delete(int? id)
