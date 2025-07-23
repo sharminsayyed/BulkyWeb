@@ -1,0 +1,88 @@
+﻿@using Bulky_Models
+@{
+    ViewData["Title"] = " Edit Product";
+}
+
+<!--header and footer are present in _Layout.cshtml -->
+@model Product
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white p-0"> Edit Product</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input asp-for="Id" hidden />
+
+            <div class="border p-3 ">
+                
+                <!--here we can see all the error message at one place only-->
+                @* <div asp-validation-summary="ModelOnly"></div> *@
+                @* <div asp-validation-summary="All"></div><!-- this will not show error for any property -->
+        <div asp-validation-summary="None"></div><!-- this here will not show any validation error--> *@
+
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Title" class="form-control border-0 shadow" />
+                    <label asp-for="Title" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Description" class="form-control border-0 shadow" />
+                    <label asp-for="Description" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="ISBN" class="form-control border-0 shadow" />
+                    <label asp-for="ISBN" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="ISBN" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Author" class="form-control border-0 shadow" />
+                    <label asp-for="Author" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Author" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="ListPrice" class="form-control border-0 shadow" />
+                    <label asp-for="ListPrice" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="ListPrice" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Price" class="form-control border-0 shadow" />
+                    <label asp-for="Price" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Price50" class="form-control border-0 shadow" />
+                    <label asp-for="Price50" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Price50" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Price100" class="form-control border-0 shadow" />
+                    <label asp-for="Price100" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Price100" class="text-danger"></span>
+                </div>
+                <div class="row pt-4">
+                    <div class="col-6 col-md-3 p-1">
+                        <button type="submit" class="btn btn-primary form-control"> Edit</button>
+
+                    </div>
+                    <div class="col-6 col-md-3 p-1">
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary border form-control">Back to list</a>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+@* here we add the validation scripts for partial view for client side validation--> *@
+@* client side validation - user input is validated in the browser before it is sent to the server-> *@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

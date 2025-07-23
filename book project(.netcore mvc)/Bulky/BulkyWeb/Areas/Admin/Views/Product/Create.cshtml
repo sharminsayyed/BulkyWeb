@@ -1,0 +1,118 @@
+﻿@* @model Bulky_Models.ViewModels.ProductVM *@
+@model ProductVM
+
+@* @{
+    ViewData["Title"] = " Create New Product";
+} *@
+    
+@* <!--header and footer are present in _Layout.cshtml -->
+<div class="text-center">
+    <h1 class="display-4">Welcome home</h1>
+</div> *@
+<!-- here we create an object of product model -->
+@* @model Product *@
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white p-0">Create Product</h2>
+            </div>
+        </div>
+    </div>
+    <!-- here we send the details using post for which we use httppost in controllers
+        it will have the obj of product that needs to be added to the table
+    -->
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            @* <input asp-for="Id" hidden/> *@
+            <div class="border p-3 ">
+                <!--here we can see all the error message at one place only-->
+                <div asp-validation-summary="ModelOnly"></div>
+                @* <div asp-validation-summary="All"></div><!-- this will not show error for any property -->
+        <div asp-validation-summary="None"></div><!-- this here will not show any validation error--> *@
+
+                <div class="form-floating py-2 col-12">
+                    <!--"In the model (ProductVM), look at the Product property. Inside that, bind to the Title property."--> 
+                    <input asp-for="Product.Title"  class="form-control border-0 shadow" />
+                    <label asp-for="Product.Title" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Product.Title" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Product.Description" class="form-control border-0 shadow" />
+                    <label asp-for="Product.Description" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Product.Description" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Product.ISBN" class="form-control border-0 shadow" />
+                    <label asp-for="Product.ISBN" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Product.ISBN" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Product.Author" class="form-control border-0 shadow" />
+                    <label asp-for="Product.Author" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Product.Author" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Product.ListPrice" class="form-control border-0 shadow" />
+                    <label asp-for="Product.ListPrice" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Product.Price" class="form-control border-0 shadow" />
+                    <label asp-for="Product.Price" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Product.Price" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Product.Price50" class="form-control border-0 shadow" />
+                    <label asp-for="Product.Price50" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Product.Price50" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Product.Price100" class="form-control border-0 shadow" />
+                    <label asp-for="Product.Price100" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Product.Price100" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <!-- getting the data from the category table -->
+                    <!-- using viewbag -->
+                    @* <select asp-for="CategoryId" asp-items="ViewBag.categorylist" class="form-select border-0 shadow"> *@
+                        <!-- here usage of viewdata -->
+                    @* <select asp-for="Product.CategoryId" asp-items="@(ViewData["CategoryList"] as IEnumerable<SelectListItem>)" class="form-select border-0 shadow"> *@
+                        <!-- here we use view model = productVm in models folder-->
+                    <select asp-for="Product.CategoryId" asp-items="@Model.categorylist" class="form-select border-0 shadow">
+
+						<option disabled selected>-- Select Category --</option>
+                    </select>
+                    <label asp-for="Product.CategoryId" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Product.ImageUrl" class="form-control border-0 shadow" />
+                    <label asp-for="Product.ImageUrl" class="ms-0 pl-0"></label>
+                    <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
+                </div>
+                <div class="row pt-4">
+                    <div class="col-6 col-md-3 p-1">
+                        <button type="submit" class="btn btn-primary form-control">Create</button>
+
+                    </div>
+                    <div class="col-6 col-md-3 p-1">
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary border form-control">Back to list</a>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<!-- here we send the details using post for which we use httppost in controllers
+    it will have the obj of product that needs to be added to the table
+-->
+
+ @* here we add the validation scripts for partial view for client side validation--> *@
+ @* client side validation - user input is validated in the browser before it is sent to the server-> *@
+
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+}   

@@ -16,14 +16,16 @@ namespace Bulky_DataAccess.Repository
 
 
         private readonly ApplicationDbContext _db;
+        internal DbSet<T> dbSet;
+        // DbSet<T> is a collection of entities of type T that can be queried from the database.
         public Repository(ApplicationDbContext db)
         {
             _db = db;
             this.dbSet = _db.Set<T>();
             // _db.Categories == dbset
+            // _db.Products == dbset
         }
 
-        internal DbSet<T> dbSet;
         public void Add(T entity)
         {
             //db.Categories.Add(obj);

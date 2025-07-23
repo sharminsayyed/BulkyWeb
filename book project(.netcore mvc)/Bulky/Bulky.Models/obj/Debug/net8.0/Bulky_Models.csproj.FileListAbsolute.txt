@@ -10,3 +10,4 @@ F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\obj\Debu
 F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\obj\Debug\net8.0\refint\Bulky_Models.dll
 F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\obj\Debug\net8.0\Bulky_Models.pdb
 F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\obj\Debug\net8.0\ref\Bulky_Models.dll
+F:\Sharmin\cSharpProjects\book project(.netcore mvc)\Bulky\Bulky.Models\obj\Debug\net8.0\Bulky_Models.csproj.AssemblyReference.cache

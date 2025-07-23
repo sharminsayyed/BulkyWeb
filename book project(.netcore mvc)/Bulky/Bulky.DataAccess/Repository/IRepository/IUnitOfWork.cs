@@ -12,6 +12,7 @@ namespace Bulky_DataAccess.Repository.IRepository
         //Unit of Work = One transaction for multiple changes to ensure data consistency.
 
         ICategoryRepository Category { get; }
+        IProductRepository Product { get; }
 
         void Save();
     }

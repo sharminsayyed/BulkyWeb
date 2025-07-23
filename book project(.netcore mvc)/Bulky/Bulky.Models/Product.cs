@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,5 +48,15 @@ namespace Bulky_Models
         [Range(1, 1000)]
         public double Price100 { get; set; }
 
+        // connecting to category table
+        public int CategoryId { get; set; }
+        //his is a navigation property to access the related Category object for a given product.
+        //The [ForeignKey("CategoryId")] attribute explicitly tells EF Core to use CategoryId as the foreign key for the Category navigation property.
+        [ForeignKey("CategoryId")]
+        [ValidateNever]
+        public Category Category { get; set; }
+
+        // image url for the product 
+        public string ImageUrl { get; set; }
     }
 }
