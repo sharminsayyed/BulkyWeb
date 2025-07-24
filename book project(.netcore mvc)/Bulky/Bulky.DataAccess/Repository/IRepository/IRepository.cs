@@ -12,8 +12,8 @@ namespace Bulky_DataAccess.Repository.IRepository
         // right now we have category class on which we want implement repository
         //T - Category
         // here we write all methods 
-        IEnumerable<T> GetAll();
-        T Get(Expression<Func<T, bool>> filter);
+        IEnumerable<T> GetAll(string? includeProperty = null);
+        T Get(Expression<Func<T, bool>> filter , string? includeProperty = null);
 
         void Add(T entity);
         //void Update(T entity); // why are we not keeping this because updating becomes too complex where we have to update only specific feilds 

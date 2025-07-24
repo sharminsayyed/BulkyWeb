@@ -1,4 +1,5 @@
-﻿using Bulky_DataAccess.Repository.IRepository;
+﻿using Bulky_DataAccess.Repository;
+using Bulky_DataAccess.Repository.IRepository;
 using Bulky_Models;
 using Bulky_Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -12,14 +13,18 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
         // using IUnitOFWork here 
         private readonly IUnitOfWork _unitOfWork;
-        public ProductController(IUnitOfWork unitOfWork)
+
+        //build in functionality provided by .net 
+        private readonly IWebHostEnvironment _webHostEnvironment; // with this we can access the wwwroot folder
+        public ProductController(IUnitOfWork unitOfWork , IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
             // get all the list of products 
-            List<Product> productList = _unitOfWork.Product.GetAll().ToList();
+            List<Product> productList = _unitOfWork.Product.GetAll(includeProperty:"Category").ToList();
            
             return View(productList);
         }
@@ -72,20 +77,68 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
         // POST - Create
         [HttpPost]
-        public IActionResult Upsert(ProductVM obj , IFormFile file)
+        public IActionResult Upsert(ProductVM obj , IFormFile? file)
         {
+            // in ifomrfile file we will receive the file uploaded by the user
             // here product.Category , product.CategoryList are invalid as we do not fill them in the form  
             // and we dont want to valid these 2 categories we use [Bind] attribute to ignore these 2 properties [ValidateNever]
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Add(obj.Product);
-                _unitOfWork.Save();
-                TempData["success"] = "Product created successfully";
+                // here we focused on adding the product 
+                string wwwRootPath = _webHostEnvironment.WebRootPath; // this will give us the path of wwwroot folder
+                if(file != null)
+                {
+                    // save and upload the file to wwwroot folder - product folder
+                    string fileName = Guid.NewGuid().ToString() +Path.GetExtension(file.FileName);
+                    // generate a unique file name
+                    // navigate to the product folder inside wwwroot
+                    string productPath = Path.Combine(wwwRootPath, @"images\product");
+
+                    // write the logic here to update the image - if the image is present delete it 
+                    if(!string.IsNullOrEmpty(obj.Product.ImageUrl))
+                    {
+                        // there is a image url and we are uploading the new image 
+                        // delete the old image 
+                        // here we get the path
+                        var oldimg = Path.Combine(wwwRootPath, obj.Product.ImageUrl.TrimStart('\\'));
+
+                        if (System.IO.File.Exists(oldimg))
+                        {
+                            // delete the image from the path 
+                            System.IO.File.Delete(oldimg);
+                        }
+                    }
+                    // add the new image 
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName),FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    // assign filename to imageurl property of product
+                    obj.Product.ImageUrl = @"\images\product\" + fileName;
+                }
+                if(obj.Product.Id == 0)
+                {
+                    _unitOfWork.Product.Add(obj.Product);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Product created successfully";
+                }
+                else
+                {
+                    _unitOfWork.Product.Update(obj.Product);
+                    _unitOfWork.Save();
+                    TempData["success"] = "Product updated successfully";
+                }
                 return RedirectToAction("Index");
             }
             else
-            {
-                return View();
+            { // here we write the code related to the update functionality 
+                obj.categorylist = _unitOfWork.Category.GetAll()
+                    .Select(u => new SelectListItem
+                    {
+                        Text = u.Name,
+                        Value = u.Id.ToString()
+                    });
+                return View(obj);
             }
         }
 
