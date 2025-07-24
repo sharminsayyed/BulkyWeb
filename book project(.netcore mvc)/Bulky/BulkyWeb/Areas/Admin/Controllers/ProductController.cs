@@ -23,7 +23,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            // get all the list of products 
+            // get all the list of products and also include the category 
             List<Product> productList = _unitOfWork.Product.GetAll(includeProperty:"Category").ToList();
            
             return View(productList);
@@ -84,7 +84,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             // and we dont want to valid these 2 categories we use [Bind] attribute to ignore these 2 properties [ValidateNever]
             if (ModelState.IsValid)
             {
-                // here we focused on adding the product 
+                // here we focused on adding the image file 
                 string wwwRootPath = _webHostEnvironment.WebRootPath; // this will give us the path of wwwroot folder
                 if(file != null)
                 {
@@ -130,8 +130,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            else
-            { // here we write the code related to the update functionality 
+            else { 
                 obj.categorylist = _unitOfWork.Category.GetAll()
                     .Select(u => new SelectListItem
                     {
@@ -190,6 +189,20 @@ namespace BulkyWeb.Areas.Admin.Controllers
             TempData["success"] = "Product deleted successfully";
             return RedirectToAction("Index");
         }
+
+
+        #region API CALLS
+
+        [HttpGet]
+        // mvc project has a support for api
+        public IActionResult GetAll()
+        {
+            // admin/product/getall
+            List<Product> productList = _unitOfWork.Product.GetAll(includeProperty: "Category").ToList();
+            return Json(new { data = productList });
+        }
+
+        #endregion
 
     }
 }

@@ -30,7 +30,7 @@
 				</div>
 
 			</div>
-			<table class="table table-bordered table-striped">
+			<table id="data" class="table table-bordered table-striped">
 				<thead>
 					<tr>
 						<th>Title</th>
@@ -43,7 +43,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!-- we can c# code here
+					@*  <!-- we can c# code here
 						model is written like Model refers to the same thing
 					-->
 					@foreach (var obj in Model)
@@ -65,12 +65,18 @@
 								</div>
 							</td>
 						</tr>
-					}
+					} *@ 
+
+					 
 				</tbody>
 
 			</table>
 		</div>
 	</div>
 </div>
+
+@section Scripts{
+<script src="~/js/product.js"></script>
+}
 
 
