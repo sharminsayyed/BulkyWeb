@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Bulky_Models")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9ea4a2242efb295b6a47aefe2586359b1b56e538")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4c5f5262701de62bfc6e8db84bfbe1bbdaf5f60e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Bulky_Models")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Bulky_Models")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

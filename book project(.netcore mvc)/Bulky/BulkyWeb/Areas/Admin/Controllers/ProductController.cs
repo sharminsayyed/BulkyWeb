@@ -169,32 +169,36 @@ namespace BulkyWeb.Areas.Admin.Controllers
         //    }
         //}
 
-        // GET - Delete
-        public IActionResult Delete(int? id)
-        {
-            if(id == null | id == 0) { return NotFound(); }
-            // fetching the obj from db
-            Product obj = _unitOfWork.Product.Get(u => u.Id == id);
-            if (obj == null) { return NotFound(); }
-            return View(obj);
-        }
+        // Commented out the Delete functionality as we are using API calls for delete operation
+        // beacause we are using AJAX to delete the product from the table without refreshing the page
 
-        // POST - Delete
-        [HttpPost]
-        public IActionResult Delete(Product obj)
-        {
-            // removing the given obj from db 
-            _unitOfWork.Product.Remove(obj);
-            _unitOfWork.Save();
-            TempData["success"] = "Product deleted successfully";
-            return RedirectToAction("Index");
-        }
+        // GET - Delete 
+        //public IActionResult Delete(int? id)
+        //{
+        //    if(id == null | id == 0) { return NotFound(); }
+        //    // fetching the obj from db
+        //    Product obj = _unitOfWork.Product.Get(u => u.Id == id);
+        //    if (obj == null) { return NotFound(); }
+        //    return View(obj);
+        //}
+
+        //// POST - Delete
+        //[HttpPost]
+        //public IActionResult Delete(Product obj)
+        //{
+        //    // removing the given obj from db 
+        //    _unitOfWork.Product.Remove(obj);
+        //    _unitOfWork.Save();
+        //    TempData["success"] = "Product deleted successfully";
+        //    return RedirectToAction("Index");
+        //}
 
 
         #region API CALLS
 
         [HttpGet]
         // mvc project has a support for api
+        //So yes, Controller → JSON → JavaScript → Table
         public IActionResult GetAll()
         {
             // admin/product/getall
@@ -202,6 +206,29 @@ namespace BulkyWeb.Areas.Admin.Controllers
             return Json(new { data = productList });
         }
 
+        //[HttpDelete]
+        public IActionResult Delete(int? id)
+        { // admin/product/delete
+            var productTobeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
+            if(productTobeDeleted == null)
+            {
+                return Json(new { success = false, message = "Error while deleting" });
+            }
+
+            // delete the image 
+            var oldimg = Path.Combine(_webHostEnvironment.WebRootPath, productTobeDeleted.ImageUrl.TrimStart('\\'));
+
+            if (System.IO.File.Exists(oldimg))
+            {
+                // delete the image from the path 
+                System.IO.File.Delete(oldimg);
+            }
+
+            // remove the product 
+            _unitOfWork.Product.Remove(productTobeDeleted);
+            _unitOfWork.Save();
+            return Json(new { success = true, message = "Product Deleted Successfully!" });
+        }
         #endregion
 
     }
