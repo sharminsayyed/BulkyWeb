@@ -2,6 +2,7 @@ using Bulky_DataAcccess.Data;
 using Bulky_DataAccess.Repository;
 using Bulky_DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options=>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 // tools -> nuget package manager ->console -> update-database 
 // this creates a database in SSMS
+
+// this added when we add Identity 
+builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+// configure for razor page (login ,register usage)
+builder.Services.AddRazorPages();
 
 //adding category repository to the service collection
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -43,9 +50,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+// before authorization we need to add authentication
+app.UseAuthentication();
 app.UseAuthorization();
 
+// makes sure to add routing needed to map razor pages 
+// when we add migrations to the database from the nuget console 
+// Identity will create all the table related to Ident
+app.MapRazorPages();
 // rounting - defines that if u type something in url where it should send request to 
 // if nothing is defined go to the home Controller and index action 
 // these are basically urls - that contains controllers and index and actions

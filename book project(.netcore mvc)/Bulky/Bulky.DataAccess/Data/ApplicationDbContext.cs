@@ -1,4 +1,5 @@
 ﻿using Bulky_Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore; // this is a nuget package 
 // this is the model class that we created
 
@@ -10,7 +11,7 @@ namespace Bulky_DataAcccess.Data
 {
     // this is where we use EFcore
     // DbContext - root class for EFCore
-    public class ApplicationDbContext :DbContext
+    public class ApplicationDbContext :IdentityDbContext
     {
         // basic configuration of entity framework core 
         // pass th connection string 
@@ -26,9 +27,14 @@ namespace Bulky_DataAcccess.Data
         // create a table 
         public DbSet<Product> Products { get; set; }
 
+        // table is created by the Identity we are just adding some columns to existing table
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+
         // to add records to the category table 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
                 new Category { Id = 2, Name = "Comedy", DisplayOrder = 3 },
