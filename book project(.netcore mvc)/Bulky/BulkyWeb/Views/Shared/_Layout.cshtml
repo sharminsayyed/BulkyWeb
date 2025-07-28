@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Bulky.Utility
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -35,21 +37,25 @@
                         <li class="nav-item">
                             <a class="nav-link " asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Content Management
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- adding the link to the controller and its action and also added area-->
-                                <li class="nav-item">
-                                    <a class="dropdown-item " asp-area="Admin" asp-controller="Category" asp-action="Index">Category </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item " asp-area="Admin" asp-controller="Product" asp-action="Index">Products </a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                            </ul>
-                        </li>
+                        @if (User.IsInRole(StaticDetails.Role_Admin))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Content Management
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- adding the link to the controller and its action and also added area-->
+                                    <li class="nav-item">
+                                        <a class="dropdown-item " asp-area="Admin" asp-controller="Category" asp-action="Index">Category </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item " asp-area="Admin" asp-controller="Product" asp-action="Index">Products </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                </ul>
+                            </li>
+                        }
+                       
                     </ul>
                     <!-- adding the login partial view we got from the identity -->
                     <partial name="_LoginPartial" />

@@ -3,6 +3,8 @@ using Bulky_DataAccess.Repository;
 using Bulky_DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Bulky_Utility;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +21,13 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 // this creates a database in SSMS
 
 // this added when we add Identity 
-builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser ,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+// always add after the configration of the identity 
+builder.Services.ConfigureApplicationCookie(options => {
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LogoutPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
 
 // configure for razor page (login ,register usage)
 builder.Services.AddRazorPages();
@@ -34,6 +42,10 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 //Whenever someone asks for IUnitOfWork, give them an instance of UnitOfWork class.
 // asked of IUnitOfWork implementation of UnitOfWork class will be provided
+
+//adding the email sender service
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+
 
 var app = builder.Build();
 

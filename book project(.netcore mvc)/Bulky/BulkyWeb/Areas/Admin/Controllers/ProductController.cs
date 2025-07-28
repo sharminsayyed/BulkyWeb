@@ -1,13 +1,17 @@
-﻿using Bulky_DataAccess.Repository;
+﻿using Bulky.Utility;
+using Bulky_DataAccess.Repository;
 using Bulky_DataAccess.Repository.IRepository;
 using Bulky_Models;
 using Bulky_Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BulkyWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = StaticDetails.Role_Admin)]
+
     public class ProductController : Controller
     {
 

@@ -3,12 +3,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Bulky_DataAcccess.Data;
 using Bulky_Models;
 using Bulky_DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
+using Bulky.Utility;
 
 // here we can perfrom crud operations 
 namespace BulkyWeb.Areas.Admin.Controllers
 {
     // here we need to specify to which area this controller belongs to
     [Area("Admin")]
+    [Authorize(Roles =StaticDetails.Role_Admin)]
     public class CategoryController : Controller
     {
         /* comment this section because we are using repository pattern 
