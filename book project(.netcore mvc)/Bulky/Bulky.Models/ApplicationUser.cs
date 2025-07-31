@@ -16,7 +16,7 @@ namespace Bulky_Models
         // it alsa add an extra column called Discriminator
         // this is the column that will be used to identify the type of user(identity user or application user)
         [Required]
-        public int Name { get; set; }
+        public string  Name { get; set; }
 
         public  string? StreeAddress { get; set; }
         public  string? City { get; set; }
